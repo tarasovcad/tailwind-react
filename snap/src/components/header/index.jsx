@@ -7,8 +7,10 @@ import { NavMenu } from '../nav-menu';
 import { FEATURES } from './constants';
 import { COMPANY } from './constants';
 import { Button } from '../button';
+import { MobileMenu } from '../mobile-menu';
 
 export const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <header className="flex items-center">
       <LogoIcon />
@@ -26,9 +28,12 @@ export const Header = () => {
         <Button>Login</Button>
         <Button hasBorder={true}>Register</Button>
       </div>
-      <div className="flex xl:hidden ml-auto cursor-pointer z-30">
-        <MenuIcon />
+      <div
+        className="flex xl:hidden ml-auto cursor-pointer z-30"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        {isMobileMenuOpen ? <MenuCloseIcon /> : <MenuIcon />}
       </div>
+      <MobileMenu isOpen={isMobileMenuOpen} />
     </header>
   );
 };
